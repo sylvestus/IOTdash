@@ -15,11 +15,11 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
--- Dumping database structure for thingspeaklocal
-CREATE DATABASE IF NOT EXISTS `thingspeaklocal` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
-USE `thingspeaklocal`;
+-- Dumping database structure for thingspeak
+CREATE DATABASE IF NOT EXISTS `thingspeak` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
+USE `thingspeak`;
 
--- Dumping structure for table thingspeaklocal.devices
+-- Dumping structure for table thingspeak.devices
 CREATE TABLE IF NOT EXISTS `devices` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `device_id` varchar(150) DEFAULT NULL,
@@ -36,12 +36,12 @@ CREATE TABLE IF NOT EXISTS `devices` (
   CONSTRAINT `fk_devices_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table thingspeaklocal.devices: ~2 rows (approximately)
+-- Dumping data for table thingspeak.devices: ~2 rows (approximately)
 INSERT INTO `devices` (`id`, `device_id`, `model`, `site_id`, `type`, `location_id`, `status`, `user_id`, `updated_at`, `created_at`) VALUES
 	(3, 'TCHSVNNH2023001', 'smart meter', 5, 'PG Monitor', 5, 'Online', 1, '2023-06-05 18:39:09', '2023-06-12 22:23:35'),
 	(27, '4566', 'NewModelT5', 5, 'PG Monitor', 7, 'Offline', 1, '2023-06-14 08:11:09', '2023-06-14 08:11:09');
 
--- Dumping structure for table thingspeaklocal.distance
+-- Dumping structure for table thingspeak.distance
 CREATE TABLE IF NOT EXISTS `distance` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `tank_level` varchar(50) DEFAULT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `distance` (
   KEY `Index 1` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1255 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table thingspeaklocal.distance: ~1,076 rows (approximately)
+-- Dumping data for table thingspeak.distance: ~1,076 rows (approximately)
 INSERT INTO `distance` (`id`, `tank_level`, `battery_level`, `device_id`, `name`, `status`, `last_refresh`, `signal_stregth`, `created_at`, `updated_at`) VALUES
 	(601, '0.00', NULL, 'TCHSVNNH2023001', 'Tank Level Monitor', 'OFF', '12:01:59', '0', '2023-05-27 07:06:49', '2023-05-27 07:06:49'),
 	(602, '0.00', NULL, 'TCHSVNNH2023001', 'Tank Level Monitor', 'OFF', '12:02:02', '0', '2023-05-27 07:06:51', '2023-05-27 07:06:51'),
@@ -709,7 +709,7 @@ INSERT INTO `distance` (`id`, `tank_level`, `battery_level`, `device_id`, `name`
 	(1252, '21.39', NULL, 'TCHSVNNH2023001', 'Tank Level Monitor', 'ON', NULL, '-38', '2023-05-27 08:34:24', '2023-05-27 08:34:24'),
 	(1253, '20.25', NULL, 'TCHSVNNH2023001', 'Tank Level Monitor', 'ON', NULL, '-52', '2023-05-27 08:36:21', '2023-05-27 08:36:21');
 
--- Dumping structure for table thingspeaklocal.location
+-- Dumping structure for table thingspeak.location
 CREATE TABLE IF NOT EXISTS `location` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `location` varchar(50) DEFAULT NULL,
@@ -719,14 +719,14 @@ CREATE TABLE IF NOT EXISTS `location` (
   KEY `Index 1` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table thingspeaklocal.location: ~4 rows (approximately)
+-- Dumping data for table thingspeak.location: ~4 rows (approximately)
 INSERT INTO `location` (`id`, `location`, `site_id`, `created_at`, `updated_at`) VALUES
 	(5, 'Kamakis', 6, '2023-06-11 17:36:23', '2023-06-11 17:36:23'),
 	(6, 'ruiru ndani', 6, '2023-06-11 17:51:34', '2023-06-11 17:51:34'),
 	(7, 'coner', 5, '2023-06-11 17:52:31', '2023-06-11 17:52:31'),
 	(10, 'coner3dn', 5, '2023-06-11 18:26:57', '2023-06-11 18:43:01');
 
--- Dumping structure for table thingspeaklocal.notification
+-- Dumping structure for table thingspeak.notification
 CREATE TABLE IF NOT EXISTS `notification` (
   `id` int(100) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(50) unsigned DEFAULT NULL,
@@ -740,14 +740,14 @@ CREATE TABLE IF NOT EXISTS `notification` (
   CONSTRAINT `FK_notification_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table thingspeaklocal.notification: ~4 rows (approximately)
+-- Dumping data for table thingspeak.notification: ~4 rows (approximately)
 INSERT INTO `notification` (`id`, `user_id`, `subject`, `message`, `is_read`, `created_at`, `updated_at`) VALUES
 	(3, 1, 'The New Projectr', 'Id like to know the progress of the project', 1, '2023-05-31 23:41:44', '2023-06-01 20:36:41'),
 	(4, 1, 'Field Stipend', 'Id like to know the progress of the stipend processing', 1, '2023-05-31 23:41:39', '2023-06-01 20:36:56'),
 	(9, 1, 'Field Stipend', 'Id like to know the progress of the stipend processing', 1, '2023-06-23 20:55:55', '2023-06-04 20:06:33'),
 	(22, 1, 'Subscription Early warnig', 'your subscription premium yearly  for duration yearly and 13 of devices NewModelT5 PG Monitor is due for subscription in 5 or less days', 0, '2023-07-03 18:10:57', '2023-07-03 18:10:57');
 
--- Dumping structure for table thingspeaklocal.notification_config
+-- Dumping structure for table thingspeak.notification_config
 CREATE TABLE IF NOT EXISTS `notification_config` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(111) DEFAULT NULL,
@@ -759,11 +759,11 @@ CREATE TABLE IF NOT EXISTS `notification_config` (
   KEY `Index 1` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table thingspeaklocal.notification_config: ~0 rows (approximately)
+-- Dumping data for table thingspeak.notification_config: ~0 rows (approximately)
 INSERT INTO `notification_config` (`id`, `user_id`, `notify_by`, `at_level`, `how_frequent`, `created_at`, `updated_at`) VALUES
 	(5, 1, '5', 4, '4', '2023-06-23 23:04:09', '2023-06-23 23:04:09');
 
--- Dumping structure for table thingspeaklocal.receipts
+-- Dumping structure for table thingspeak.receipts
 CREATE TABLE IF NOT EXISTS `receipts` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `total_amount` int(11) DEFAULT 0,
@@ -772,7 +772,7 @@ CREATE TABLE IF NOT EXISTS `receipts` (
   KEY `Index 1` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table thingspeaklocal.receipts: ~14 rows (approximately)
+-- Dumping data for table thingspeak.receipts: ~14 rows (approximately)
 INSERT INTO `receipts` (`id`, `total_amount`, `created_at`, `updated_at`) VALUES
 	(23, 133100, '2023-06-18 21:42:58', '2023-06-18 21:42:58'),
 	(24, 133100, '2023-06-19 06:03:52', '2023-06-19 06:03:52'),
@@ -791,7 +791,7 @@ INSERT INTO `receipts` (`id`, `total_amount`, `created_at`, `updated_at`) VALUES
 	(37, 5000, '2023-06-26 07:05:20', '2023-06-26 07:05:20'),
 	(38, 15600, '2023-06-26 07:34:47', '2023-06-26 07:34:47');
 
--- Dumping structure for table thingspeaklocal.sites
+-- Dumping structure for table thingspeak.sites
 CREATE TABLE IF NOT EXISTS `sites` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `site_name` varchar(250) DEFAULT NULL,
@@ -800,12 +800,12 @@ CREATE TABLE IF NOT EXISTS `sites` (
   KEY `Index 1` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table thingspeaklocal.sites: ~2 rows (approximately)
+-- Dumping data for table thingspeak.sites: ~2 rows (approximately)
 INSERT INTO `sites` (`id`, `site_name`, `created_at`, `updated_at`) VALUES
 	(5, 'Embakasi East', '2023-06-11 16:29:23', '2023-06-11 16:29:23'),
 	(6, 'Ruiru ndani', '2023-06-11 16:44:52', '2023-06-11 17:36:00');
 
--- Dumping structure for table thingspeaklocal.subscribed_packages
+-- Dumping structure for table thingspeak.subscribed_packages
 CREATE TABLE IF NOT EXISTS `subscribed_packages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
@@ -820,12 +820,12 @@ CREATE TABLE IF NOT EXISTS `subscribed_packages` (
   KEY `Index 1` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table thingspeaklocal.subscribed_packages: ~2 rows (approximately)
+-- Dumping data for table thingspeak.subscribed_packages: ~2 rows (approximately)
 INSERT INTO `subscribed_packages` (`id`, `user_id`, `subscription_package_id`, `no_of_devices`, `status`, `isPayed`, `next_payment`, `receipt_id`, `created_at`, `updated_at`) VALUES
 	(11, 1, 14, 10, 'Inactive', 'No', '2023-06-01 23:25:07', '37', '2023-06-26 07:05:07', '2023-07-03 17:28:13'),
 	(12, 1, 11, 13, 'Active', 'Yes', '2024-06-26 10:34:20', '38', '2023-06-26 07:34:20', '2023-06-26 07:34:57');
 
--- Dumping structure for table thingspeaklocal.subscription
+-- Dumping structure for table thingspeak.subscription
 CREATE TABLE IF NOT EXISTS `subscription` (
   `id` int(100) unsigned NOT NULL AUTO_INCREMENT,
   `sub_name` varchar(255) DEFAULT NULL,
@@ -837,14 +837,14 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   KEY `Index 1` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table thingspeaklocal.subscription: ~4 rows (approximately)
+-- Dumping data for table thingspeak.subscription: ~4 rows (approximately)
 INSERT INTO `subscription` (`id`, `sub_name`, `sub_duration`, `sub_device_type`, `sub_amount`, `created_at`, `updated_at`) VALUES
 	(11, 'premium yearly', 'yearly', 'NewModelT5 PG Monitor', '1200', '2023-06-26 06:28:06', '2023-06-26 06:28:06'),
 	(12, 'premium monthly', 'monthly', 'smart meter PG Monitor', '600', '2023-06-26 06:28:37', '2023-06-26 06:33:30'),
 	(13, 'standard yearly', 'yearly', 'NewModelT5 PG Monitor', '1000', '2023-06-26 06:29:21', '2023-06-26 06:29:21'),
 	(14, 'standard Monthly', 'monthly', 'NewModelT5 PG Monitor', '500', '2023-06-26 06:29:56', '2023-06-26 06:29:56');
 
--- Dumping structure for table thingspeaklocal.users
+-- Dumping structure for table thingspeak.users
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(50) unsigned NOT NULL AUTO_INCREMENT,
   `type_id` int(50) unsigned DEFAULT NULL,
@@ -859,7 +859,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table thingspeaklocal.users: ~6 rows (approximately)
+-- Dumping data for table thingspeak.users: ~6 rows (approximately)
 INSERT INTO `users` (`id`, `type_id`, `profile_image`, `name`, `email`, `phone_no`, `password`, `added_by`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'uploads/profiles/1687566797.png', 'Sylvestus Sigei', 'silvanussigei1996@gmail.com', '0706666100', '$2y$10$/RnFflE7QXebUZ7KcA0.S.1fIlpiFMUgBZJx26Y6L8upR.etrRCvS', 1, '2023-06-24 00:33:17', '2023-06-23 21:33:17'),
 	(2, 2, NULL, 'John Doe2', 'john@example.com', '+254702658880', '$2y$10$IB.Nh669ElEGoy2jx6uNNeFy5yeK1Llm90ZEM6xCmGSclgS3.sYCi', 1, '2023-06-19 21:50:18', '2023-06-19 18:50:18'),
@@ -867,14 +867,14 @@ INSERT INTO `users` (`id`, `type_id`, `profile_image`, `name`, `email`, `phone_n
 	(13, 1, NULL, 'Glenfiddich', 'Glenfiddich@gmail.com', '+254702657780', '$2y$10$inD0HdOeMDy37jZESDnDT.6F.KS57PlWWsgzUUGxqEG30xIbXWrvG', 1, '2023-06-19 18:57:52', '2023-06-19 18:57:52'),
 	(16, 2, NULL, 'Kiprotich', 'Kiprotich@gmail.com', '+254702658880', '$2y$10$4ZdS60YJk4NRpO0f3tEVReNZgGarcQRxNzw0uwOvOGd7FQSmtjpf.', 12, '2023-06-19 21:36:04', '2023-06-19 21:36:04');
 
--- Dumping structure for table thingspeaklocal.user_types
+-- Dumping structure for table thingspeak.user_types
 CREATE TABLE IF NOT EXISTS `user_types` (
   `id` int(50) unsigned NOT NULL AUTO_INCREMENT,
   `type` varchar(250) DEFAULT NULL,
   KEY `Index 1` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table thingspeaklocal.user_types: ~2 rows (approximately)
+-- Dumping data for table thingspeak.user_types: ~2 rows (approximately)
 INSERT INTO `user_types` (`id`, `type`) VALUES
 	(1, 'Admin'),
 	(2, 'User');

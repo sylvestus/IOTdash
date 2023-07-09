@@ -42,7 +42,7 @@ class RegisterController extends Controller
         } catch (\Exception $e) {
 
 
-            return redirect()->route('home')->with('failure', 'user failed to register:  ' . $e->getMessage());
+            return redirect()->route('login')->with('failure', 'user failed to register:  ' . $e->getMessage());
         }
 
     }

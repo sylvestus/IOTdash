@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'passport',
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -88,6 +92,7 @@ return [
 
     'passwords' => [
         'users' => [
+            'driver' => 'sanctum',
             'provider' => 'users',
             'table' => 'password_resets',
             'expire' => 60,

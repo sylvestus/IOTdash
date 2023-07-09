@@ -163,28 +163,42 @@ class SaveDistanceController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $distance = new SaveDistance();
-            $distance->device_id = $request->device_id;
-            $distance->name = $request->name;
-            $distance->status = $request->status;
-            $distance->last_refresh = $request->last_refresh;
-            $distance->signal_stregth = $request->signal_strength;
-            $distance->tank_level = $request->tank_level;
-            $distance->battery_level = $request->battery_level;
-            $distance->save();
+        $devices =DB::table('devices')->get();
+        $device_id = "0";
+        foreach($devices as $device){
+            $device_id= $device->device_id;
+        }
+        if
+        ($device_id == $request->device_id) {
+            try {
+                $distance = new SaveDistance();
+                $distance->device_id = $request->device_id;
+                $distance->name = $request->name;
+                $distance->status = $request->status;
+                $distance->last_refresh = $request->last_refresh;
+                $distance->signal_stregth = $request->signal_strength;
+                $distance->tank_level = $request->tank_level;
+                $distance->battery_level = $request->battery_level;
+                $distance->save();
 
-            return response()->json([
-                'success' => true,
-                'message' => 'successfully inserted'
-            ]);
-        } catch (\Exception $e) {
-            // Log the error message or do something else to handle the error
+                return response()->json([
+                    'success' => true,
+                    'message' => 'successfully inserted'
+                ]);
+            } catch (\Exception $e) {
+                // Log the error message or do something else to handle the error
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Failed to insert distance'
+                ]);
+            }
+        } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to insert distance'
+                'message' => 'There is no such device please regiter it from the dashboard'
             ]);
         }
+
     }
 
     /**
